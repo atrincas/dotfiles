@@ -1,0 +1,70 @@
+# --- Zinit ---
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+[ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname $ZINIT_HOME)" && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Turbo-loaded plugins (deferred until after first prompt)
+zinit wait lucid for \
+    atinit"zicompinit; zicdreplay" \
+        zdharma-continuum/fast-syntax-highlighting \
+    atload"_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions \
+    OMZP::git
+
+# Personal aliases
+source "$ZDOTDIR/aliases.zsh"
+
+# Typing a bare path (e.g. /tmp or ~/Project) would otherwise try to *execute* the path; directories
+# are not executable, so you get "zsh: permission denied". auto_cd treats a directory name as `cd`.
+setopt auto_cd
+
+export ARCHFLAGS="-arch $(uname -m)"
+
+# fnm completions
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+
+# Set up fzf key bindings and fuzzy completion
+command -v fzf >/dev/null && source <(fzf --zsh)
+
+# Global fzf defaults (UI + keybindings)
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --bind 'ctrl-/:toggle-preview'"
+
+# Use fd for standalone fzf and Ctrl+T
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# fzf completion options
+export FZF_COMPLETION_OPTS='--border --info=inline'
+export FZF_COMPLETION_PATH_OPTS='--walker file,dir,follow,hidden'
+
+# Use fd instead of the default find for path/dir completion
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Command-specific fzf options via _fzf_comprun
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo \${}'"                        "$@" ;;
+    ssh)          fzf --preview 'dig {}'                                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}'                 "$@" ;;
+  esac
+}
+
+# Local user binaries (e.g. Claude Code native installer)
+export PATH="$HOME/.local/bin:$PATH"
+
+# zoxide
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# starship
+command -v starship >/dev/null && eval "$(starship init zsh)"

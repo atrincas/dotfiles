@@ -1,0 +1,29 @@
+# tools
+brew "bat"
+brew "eza"
+brew "fd"
+brew "fnm"
+brew "fzf"
+brew "git"
+brew "git-delta"
+brew "jq"
+brew "ripgrep"
+brew "starship"
+brew "yq"
+brew "zoxide"
+
+# applications
+cask "brave-browser"
+cask "claude"
+cask "dbeaver-community"
+cask "cursor"
+cask "docker-desktop"
+cask "firefox"
+cask "google-chrome"
+cask "raycast"
+cask "slack"
+
+# fonts
+cask "font-intel-one-mono"
+cask "font-monaspace"
+cask "font-monaspice-nerd-font"
