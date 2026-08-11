@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `grill-with-docs` rule: routes "grill me" and plan stress-testing to the mattpocock-skills plugin (`grilling` + `domain-modeling`), so no prefixed slash command is needed; preferred over `grill-me`
 - `write-a-skill` skill: guides creation of new Claude Code skills with proper structure, descriptions, and review checklist
 
 ### Changed
