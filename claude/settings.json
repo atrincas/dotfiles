@@ -70,7 +70,8 @@
       "mcp__atlassian__createConfluencePage",
       "mcp__atlassian__updateConfluencePage",
       "mcp__atlassian__createIssueLink"
-    ]
+    ],
+    "defaultMode": "plan"
   },
   "hooks": {
     "PreToolUse": [
@@ -180,7 +181,6 @@
       ]
     }
   },
-  "defaultMode": "plan",
   "model": "claude-opus-4-6",
   "effortLevel": "high"
 }
