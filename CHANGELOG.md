@@ -22,3 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - settings: default model changed from `claude-opus-4-6` to `opus[1m]` (Opus 5, 1M context)
 - global gitignore: expanded AI-tool entries (CLAUDE.md, CONTEXT.md, AGENTS.md, `.claude/`, `.agents/`, `.mcp.json`, `.playwright-mcp/`, copilot instructions, skills-lock.json)
 - `grill-me` skill: shortened closed-questions rule for brevity
+- `grill-with-docs` rule: added a presentation override so `grilling` asks one closed, labeled question per message instead of batching the whole frontier — the plugin's design-tree traversal with the `grill-me` prompting style
