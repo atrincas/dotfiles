@@ -20,4 +20,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - settings: moved `defaultMode` into the `permissions` block per current settings schema
 - settings: enabled fullscreen TUI and hold-to-talk voice input
 - settings: default model changed from `claude-opus-4-6` to `claude-opus-5`
+- global gitignore: expanded AI-tool entries (CLAUDE.md, CONTEXT.md, AGENTS.md, `.claude/`, `.agents/`, `.mcp.json`, `.playwright-mcp/`, copilot instructions, skills-lock.json)
 - `grill-me` skill: shortened closed-questions rule for brevity
