@@ -181,6 +181,12 @@
       ]
     }
   },
-  "model": "claude-opus-4-6",
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "voiceEnabled": true,
+  "model": "claude-opus-4-6"
 }
