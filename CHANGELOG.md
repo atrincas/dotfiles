@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `explain-pr` skill: explains a pull request in plain English for a reader who does not know the project — a fixed six-section template written in ASD-STE100 Simplified Technical English, plus a worked example; reads file statistics rather than the diff, and reports mismatches between the description and the files changed
 - `grill-with-docs` rule: routes "grill me" and plan stress-testing to the mattpocock-skills plugin (`grilling` + `domain-modeling`), so no prefixed slash command is needed; preferred over `grill-me`
 - `straight-talk` rule: enforces honest, peer-level communication with no flattery, filler praise, or false validation (always-on)
 - `straight-talk` skill: portable version of the rule for sharing with teammates
