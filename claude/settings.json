@@ -173,7 +173,7 @@
     }
   },
   "sandbox": {
-    "enabled": true,
+    "enabled": false,
     "network": {
       "allowUnixSockets": [
         "/var/run/com.apple.launchd.*/Listeners"
