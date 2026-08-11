@@ -15,4 +15,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `write-a-skill` skill: guides creation of new Claude Code skills with proper structure, descriptions, and review checklist
 
 ### Changed
+- settings: enabled `vizz-core` (Vizzuality marketplace), `warp`, and `mattpocock-skills` plugins, registering the vizzuality and claude-code-warp marketplaces
 - `grill-me` skill: shortened closed-questions rule for brevity

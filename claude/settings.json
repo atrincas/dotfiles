@@ -146,13 +146,29 @@
     "code-simplifier@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true
+    "atlassian@claude-plugins-official": true,
+    "vizz-core@vizzuality": true,
+    "warp@claude-code-warp": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "vizzuality": {
+      "source": {
+        "source": "github",
+        "repo": "Vizzuality/claude-code-standards"
+      },
+      "autoUpdate": true
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
       }
     }
   },
