@@ -26,3 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `grill-with-docs` rule: added a presentation override so `grilling` asks one closed, labeled question per message instead of batching the whole frontier — the plugin's design-tree traversal with the `grill-me` prompting style
 - `grill-with-docs` rule: gave the presentation override its missing rationale and precedence — why the picker is banned (truncated option bodies), why questions are serialised (answers reframe the frontier), that `grilling`'s `❓`/`➡️` format survives with cumulative numbering, that recommendations must state what would change them, and that markdown wins over `AskUserQuestion` in plan mode
 - `grill-with-docs` rule: added a domain-model section with concrete triggers and paths (`docs/domain/glossary.md`, `docs/domain/adr/NNN-<slug>.md`), written as each decision settles — previously "maintain the domain model as decisions crystallise" had no trigger, threshold, or destination, so nothing was ever written
+
+### Fixed
+- global `CLAUDE.md`: the configuration block pointed at `~/Developer/dotfiles`, which does not exist — every path now names the real source, `~/dev/vizzuality/dotfiles`
