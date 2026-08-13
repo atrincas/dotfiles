@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `write-a-skill` skill: guides creation of new Claude Code skills with proper structure, descriptions, and review checklist
 
 ### Changed
+- `straight-talk` rule and skill: added a "Plain language" section anchored on ASD-STE100 Simplified Technical English, matching `explain-pr` — the standard carries sentence length, active voice, and word choice, and its Technical Names and Technical Verbs rule keeps terms like `useEffect` legal, so the section only names the failures STE does not: abstraction in place of the real file or function, hazard-speak instead of what happens, metaphors for code, answers that continue past the answer, and repeating a message with more words when it did not land
+- `straight-talk` rule and skill: put "Plain language" ahead of the honesty rules, since jargon is the more frequent failure and order in an always-on prompt is not neutral; the original bullets keep their wording under a "Honesty" heading, which the reorder made necessary — "Rules" read as a leftover bucket once a second rule list sat above it
 - global `CLAUDE.md`: documented the hooks path mapping, which was missing — hook scripts are symlinked into `~/.claude/hooks/` per file, since that directory also holds vendor-installed scripts and cannot itself be a symlink
 - settings: enabled `vizz-core` (Vizzuality marketplace), `warp`, and `mattpocock-skills` plugins, registering the vizzuality and claude-code-warp marketplaces
 - settings: disabled the Bash sandbox
