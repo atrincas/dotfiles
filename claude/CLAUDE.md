@@ -6,6 +6,7 @@ All Claude Code global configuration is managed through `~/dev/vizzuality/dotfil
 - `~/dev/vizzuality/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
 - `~/dev/vizzuality/dotfiles/claude/rules/` → `~/.claude/rules/`
 - `~/dev/vizzuality/dotfiles/claude/skills/` → `~/.claude/skills/`
+- `~/dev/vizzuality/dotfiles/claude/hooks/<script>` → `~/.claude/hooks/<script>` (per file — `~/.claude/hooks/` also holds vendor-installed scripts and is not itself a symlink)
 
 ## Tool preferences
 

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `answer-dont-act` rule: an explanation question produces an explanation only — no `Edit`, `Write`, or commit on that turn; a real problem found while answering is described in prose and waits for the go-ahead
+- `answer-only-gate` hook (`UserPromptSubmit`): detects explanation-shaped prompts and injects the answer-only reminder for that turn. An imperative verb in command position cancels it, so "why is this slow? fix it" is unaffected while "why did you add the retry?" still trips — the verb's clause position is what separates the two
 - `explain-pr` skill: explains a pull request in plain English for a reader who does not know the project — a fixed six-section template written in ASD-STE100 Simplified Technical English, plus a worked example; reads file statistics rather than the diff, and reports mismatches between the description and the files changed
 - `grill-with-docs` rule: routes "grill me" and plan stress-testing to the mattpocock-skills plugin (`grilling` + `domain-modeling`), so no prefixed slash command is needed; preferred over `grill-me`
 - `straight-talk` rule: enforces honest, peer-level communication with no flattery, filler praise, or false validation (always-on)
@@ -16,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `write-a-skill` skill: guides creation of new Claude Code skills with proper structure, descriptions, and review checklist
 
 ### Changed
+- global `CLAUDE.md`: documented the hooks path mapping, which was missing — hook scripts are symlinked into `~/.claude/hooks/` per file, since that directory also holds vendor-installed scripts and cannot itself be a symlink
 - settings: enabled `vizz-core` (Vizzuality marketplace), `warp`, and `mattpocock-skills` plugins, registering the vizzuality and claude-code-warp marketplaces
 - settings: disabled the Bash sandbox
 - settings: moved `defaultMode` into the `permissions` block per current settings schema

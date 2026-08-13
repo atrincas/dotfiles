@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# UserPromptSubmit hook: flag explanation-only prompts.
+# Emits a reminder when the prompt asks for an explanation and issues no
+# instruction, so the turn answers instead of editing. Fails silent (exit 0,
+# no output) on anything unexpected - a broken hook must never eat a prompt.
+
+JQ=$(command -v jq 2>/dev/null)
+if [ -z "$JQ" ]; then
+  for candidate in /opt/homebrew/bin/jq /usr/local/bin/jq; do
+    [ -x "$candidate" ] && JQ="$candidate" && break
+  done
+fi
+[ -n "$JQ" ] || exit 0
+
+prompt=$("$JQ" -r 'if type == "object" then (.prompt // empty) else empty end' 2>/dev/null)
+[ -n "$prompt" ] || exit 0
+case "$prompt" in /*) exit 0 ;; esac
+
+lower=$(printf '%s' "$prompt" | tr '[:upper:]' '[:lower:]')
+
+ASKS="^[[:space:]]*[[:punct:]]*[[:space:]]*(why|how come|what made you|explain|what does|what is|what are|what'?s)([^[:alnum:]]|$)"
+
+# An imperative verb only counts as an instruction in command position: at the
+# start, after clause-ending punctuation, or after a connector. "why did you add
+# the retry?" mentions `add` mid-clause and stays a question; "why is this slow?
+# fix it" puts `fix` after the `?` and is an instruction.
+BOUNDARY="(^|[.;?!,][[:space:]]*|[^[:alnum:]](and|then|now|also|please)[[:space:]]+)"
+VERBS="(fix|change|update|add|remove|delete|refactor|rename|implement|apply|revert|rewrite|move|create|write|install|migrate|commit|make|do it|go ahead)"
+ORDERS="${BOUNDARY}${VERBS}([^[:alnum:]]|$)"
+
+[[ "$lower" =~ $ASKS ]] || exit 0
+[[ "$lower" =~ $ORDERS ]] && exit 0
+
+cat << 'REMINDER'
+{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"This prompt is explanation-only. Answer the question and nothing else. Do NOT call Edit, Write, or NotebookEdit, and do not commit, this turn. Reading files, git history, and diffs to answer accurately is expected. If the answer reveals a real problem, state it plainly and stop - describe the fix in prose and wait for the user's go-ahead."}}
+REMINDER
