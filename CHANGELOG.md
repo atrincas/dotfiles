@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- settings: `Bash(rm *)` deny rule — Claude cannot run `rm` at all, and deletes go through `trash` (macOS ships `/usr/bin/trash`), which is recoverable from the Finder trash. Claude Code splits compound commands on `&&`, `||`, `;`, `|`, `|&`, `&`, and newlines and matches each subcommand independently, so one wildcard rule covers `cd client && rm -rf test` and every flag spelling; bare `xargs` is stripped, so `xargs rm -rf` matches too. A `PreToolUse` hook was tried first, with an allowlist that let `rm -rf node_modules` through, and dropped: deny rules are evaluated before `ask` and `allow` and specificity does not reorder them, so no permission rule can carry the exception, but the hook that could had to scan tokens without parsing shell syntax — it denied `rg 'rm -rf' file` within minutes of being installed. Trading `rm -rf node_modules` for a guard with no false positives and no script to maintain
 - `answer-dont-act` rule: an explanation question produces an explanation only — no `Edit`, `Write`, or commit on that turn; a real problem found while answering is described in prose and waits for the go-ahead
 - `answer-only-gate` hook (`UserPromptSubmit`): detects explanation-shaped prompts and injects the answer-only reminder for that turn. An imperative verb in command position cancels it, so "why is this slow? fix it" is unaffected while "why did you add the retry?" still trips — the verb's clause position is what separates the two
 - `explain-pr` skill: explains a pull request in plain English for a reader who does not know the project — a fixed six-section template written in ASD-STE100 Simplified Technical English, plus a worked example; reads file statistics rather than the diff, and reports mismatches between the description and the files changed
@@ -33,4 +34,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `grill-with-docs` rule: added a domain-model section with concrete triggers and paths (`docs/domain/glossary.md`, `docs/domain/adr/NNN-<slug>.md`), written as each decision settles — previously "maintain the domain model as decisions crystallise" had no trigger, threshold, or destination, so nothing was ever written
 
 ### Fixed
+- `install.sh`: `claude/hooks/` was never linked, so a fresh machine got the hook entries in `settings.json` with no scripts behind them — `answer-only-gate` had been symlinked by hand. Hooks are now linked per file, skipping `*.test`
 - global `CLAUDE.md`: the configuration block pointed at `~/Developer/dotfiles`, which does not exist — every path now names the real source, `~/dev/vizzuality/dotfiles`

@@ -45,6 +45,7 @@
       "mcp__atlassian"
     ],
     "deny": [
+      "Bash(rm *)",
       "Read(.env*)",
       "Edit(.env*)",
       "Write(.env*)"

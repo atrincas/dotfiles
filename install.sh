@@ -82,6 +82,14 @@ link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 
+# Hooks are linked per file: ~/.claude/hooks also holds vendor-installed scripts,
+# so the directory itself cannot be a symlink.
+mkdir -p "$HOME/.claude/hooks"
+for hook in "$DOTFILES"/claude/hooks/*; do
+  case "$hook" in *.test) continue ;; esac
+  link_file "$hook" "$HOME/.claude/hooks/$(basename "$hook")"
+done
+
 echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""
