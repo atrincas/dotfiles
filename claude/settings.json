@@ -42,13 +42,14 @@
       "mcp__plugin_figma_figma",
       "mcp__plugin_playwright_playwright",
       "mcp__next-devtools",
-      "mcp__atlassian"
+      "mcp__plugin_atlassian_atlassian"
     ],
     "deny": [
       "Bash(rm *)",
       "Read(.env*)",
       "Edit(.env*)",
-      "Write(.env*)"
+      "Write(.env*)",
+      "mcp__plugin_atlassian_atlassian__addCommentToJiraIssue"
     ],
     "ask": [
       "Bash(git push --force*)",
@@ -63,14 +64,13 @@
       "Bash(gh issue close*)",
       "Bash(gh issue delete*)",
       "Bash(gh repo delete*)",
-      "mcp__atlassian__createJiraIssue",
-      "mcp__atlassian__editJiraIssue",
-      "mcp__atlassian__transitionJiraIssue",
-      "mcp__atlassian__addCommentToJiraIssue",
-      "mcp__atlassian__addWorklogToJiraIssue",
-      "mcp__atlassian__createConfluencePage",
-      "mcp__atlassian__updateConfluencePage",
-      "mcp__atlassian__createIssueLink"
+      "mcp__plugin_atlassian_atlassian__createJiraIssue",
+      "mcp__plugin_atlassian_atlassian__editJiraIssue",
+      "mcp__plugin_atlassian_atlassian__transitionJiraIssue",
+      "mcp__plugin_atlassian_atlassian__addWorklogToJiraIssue",
+      "mcp__plugin_atlassian_atlassian__createConfluencePage",
+      "mcp__plugin_atlassian_atlassian__updateConfluencePage",
+      "mcp__plugin_atlassian_atlassian__createIssueLink"
     ],
     "defaultMode": "plan"
   },
