@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `straight-talk` rule: enforces honest, peer-level communication with no flattery, filler praise, or false validation (always-on)
 - `straight-talk` skill: portable version of the rule for sharing with teammates
 - `tests-and-comments` rule: every test and comment must earn its place — no narration comments, no external references in source, tests target behavior boundaries and must state what regression they catch
+- `no-commit` skill: holds every change in the working tree for manual review — no `git commit` in any spelling, no `git add`, no `gh pr create`; the turn ends when the work does, with no prompt to commit, and only an explicit later instruction releases the hold. Written for the auto-mode path after a plan is approved, where `Bash(git commit:*)` in the `allow` list otherwise lets a commit through with no prompt. It is a reminder, not a guard: the `allow` rule is unchanged, so a deny rule or a `PreToolUse` hook would be what actually blocks the command
 - `codebase-memory` skill and settings hooks wiring the codebase-memory MCP server into sessions (PreToolUse gate on Grep/Glob, SessionStart and SubagentStart reminders via `~/.claude/hooks/cbm-*` scripts)
 - `write-a-skill` skill: guides creation of new Claude Code skills with proper structure, descriptions, and review checklist
 
