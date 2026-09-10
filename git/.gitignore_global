@@ -19,3 +19,6 @@ skills-lock.json
 .playwright-mcp/
 .github/copilot-instructions.md
 .github/instructions/
+
+# Tooling
+portless.json
