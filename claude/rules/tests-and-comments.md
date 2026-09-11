@@ -4,17 +4,33 @@ Code is not free just because it is easy to generate. Every test and every comme
 
 ## Comments
 
-A comment is justified only when it states a constraint or context the code itself cannot express — a workaround for an upstream bug, a non-obvious invariant, a deliberate deviation from the expected approach.
+Default to zero comments. Write none unless the test below passes.
 
-Never write comments that:
+### The test
 
-- Narrate what the code does ("increment the counter", "fetch the user")
-- Explain why a change is correct or how it differs from before — that belongs in the commit message or PR description
-- Reference external systems: issue tracker keys (`ABC-123`), Jira, PR numbers, internal tools (LastPass, Slack), or conversation context
+A comment is allowed only if both are true:
+
+1. It names a cause **outside this file** that forced the code — an upstream bug, a library or framework default, a browser or platform limit, a data quirk. "This code is subtle", "this is easy to get wrong", and "a future reader will wonder why" are not outside causes.
+2. It fits on **one line**.
+
+If the explanation needs more than one line, the comment is not where it goes. Write the sentence in the PR description, the commit message, or the doc beside the code — and then write no comment. Writing that sentence is part of the task, not a suggestion: do it in the same change.
+
+### Never
+
+- Narrate what the code does
+- Explain why a change is correct or how it differs from before
+- Reference external systems: issue tracker keys (`ABC-123`), Jira, PR numbers, internal tools, conversation context
 - Restate the function or variable name in prose
-- Explain how something works — that is what documentation is for
+- Explain how something works
+- Stack two or more reasons in one comment — that means the code needs splitting or renaming, not a paragraph
 
-Default to zero comments. If an explanation feels necessary, first try renaming or restructuring so it isn't. Explanation aimed at the reviewer goes in chat, the commit message, or the PR description — never in source.
+### Try this first
+
+Renaming or restructuring beats a comment. `unitsFromDisplacementSet` needs no comment saying which set it reads.
+
+### Before you report the work finished
+
+Re-read every comment line this change adds. State the outside cause of each one in your response, in plain words. Delete every comment whose cause you cannot state.
 
 ## Tests
 

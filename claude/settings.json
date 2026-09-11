@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
-  "outputStyle": "Concise",
   "permissions": {
     "allow": [
       "Read",
@@ -75,6 +74,7 @@
     ],
     "defaultMode": "plan"
   },
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -154,13 +154,6 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "context7@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true,
     "vizz-core@vizzuality": true,
     "warp@claude-code-warp": true,
     "mattpocock-skills@claude-plugins-official": true
@@ -186,6 +179,7 @@
       }
     }
   },
+  "outputStyle": "Concise",
   "sandbox": {
     "enabled": false,
     "network": {
@@ -200,6 +194,5 @@
     "enabled": true,
     "mode": "hold"
   },
-  "voiceEnabled": true,
-  "model": "opus[1m]"
+  "voiceEnabled": true
 }
