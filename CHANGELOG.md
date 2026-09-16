@@ -41,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `grill-with-docs` rule: added a domain-model section with concrete triggers and paths (`docs/domain/glossary.md`, `docs/domain/adr/NNN-<slug>.md`), written as each decision settles — previously "maintain the domain model as decisions crystallise" had no trigger, threshold, or destination, so nothing was ever written
 
 ### Removed
-- settings: disabled the `frontend-design`, `context7`, `superpowers`, `code-simplifier`, `playwright`, `figma` and `atlassian` plugins from `claude-plugins-official`, leaving `vizz-core`, `warp` and `mattpocock-skills`. Two things in this repo now point at servers that no longer load: the `context7` rule tells Claude to fetch documentation through the Context7 MCP, and the Atlassian permission entries (the `addCommentToJiraIssue` deny rule, the seven `ask` rules and the server-level `allow`) match a `mcp__plugin_atlassian_atlassian__*` namespace that is no longer registered. The permission rules are harmless while the server is off — they match nothing and re-arm if the plugin comes back — but the `context7` rule asks for a tool that is not there
 - settings: the reordered keys in this diff (`model`, `outputStyle`, `voiceEnabled`) are Claude Code rewriting the file, not an edit
 
 ### Fixed
