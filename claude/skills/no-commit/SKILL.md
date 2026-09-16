@@ -13,4 +13,15 @@ For the rest of this session:
 
 When the implementation is done, do not ask for permission to commit. The turn ends there.
 
-Only an explicit later instruction to commit releases this hold. Approving a plan does not. A passing test suite does not. An earlier "commit it when done" in the same prompt that invoked this skill does not.
+## Releasing the hold
+
+**`pr`** releases it in full — branch, stage, commit, push, `gh pr create`. So do **`commit`** and **`push`**. The word anywhere in the user's message is enough: "create pr", "lets create a pr", "open the pr", "commit it", "lets commit everything".
+
+On any of those:
+
+- Do it. Do not ask, do not confirm, do not offer options, and never use `AskUserQuestion`.
+- Do not announce that the hold is lifted, and do not reason out loud about whether the words count. They count.
+
+A real blocker is still a blocker — a failing check, an unrelated change in the diff, no obvious base branch. Name it and deal with it. "Is the hold really lifted?" is not one of those.
+
+Nothing else releases the hold. Approving a plan does not. A passing test suite does not. An earlier "commit it when done" in the same prompt that invoked this skill does not.
