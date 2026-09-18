@@ -86,6 +86,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/comment-length-gate",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [

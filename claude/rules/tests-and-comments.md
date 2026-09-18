@@ -13,6 +13,8 @@ A comment is allowed only if both are true:
 1. It names a cause **outside this file** that forced the code — an upstream bug, a library or framework default, a browser or platform limit, a data quirk. "This code is subtle", "this is easy to get wrong", and "a future reader will wonder why" are not outside causes.
 2. It fits on **one line**.
 
+"Comment" means every form: `//`, `#`, a `/* */` block, a JSDoc or TSDoc `/** */`, and a Python docstring. A `/** */` on an exported symbol is not exempt because an editor shows it on hover — it is held to the same one line. `/** Rows the panel cannot represent. */` is a complete doc comment.
+
 If the explanation needs more than one line, the comment is not where it goes. Write the sentence in the PR description, the commit message, or the doc beside the code — and then write no comment. Writing that sentence is part of the task, not a suggestion: do it in the same change.
 
 ### Never
@@ -28,9 +30,13 @@ If the explanation needs more than one line, the comment is not where it goes. W
 
 Renaming or restructuring beats a comment. `unitsFromDisplacementSet` needs no comment saying which set it reads.
 
-### Before you report the work finished
+### The one-line cap is enforced
 
-Re-read every comment line this change adds. State the outside cause of each one in your response, in plain words. Delete every comment whose cause you cannot state.
+`comment-length-gate` is a `PreToolUse` hook on `Edit` and `Write`. It denies any edit to a code file that introduces two or more consecutive comment lines, a `/* */` over more than one line, or a multi-line docstring. Directive comments, license headers and comment text inside string literals are exempt, and a block already present in the text being replaced is not counted, so moving or reindenting existing code is not blocked.
+
+A denial is not a prompt to reword the block into fewer, longer lines. Cut it to one line naming the outside cause, or delete it and write the sentence in the PR description or commit message.
+
+The hook checks length only. Condition 1 — that the comment names a cause outside the file — is still yours to judge, and it is the condition that removes most comments.
 
 ## Tests
 
