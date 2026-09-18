@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# PostToolUse hook: re-assert the one-question rule after `grilling` loads.
+#
+# `mattpocock-skills:grilling` says to ask the whole frontier in one round.
+# grill-me overrides that, but the override is read before the skill is
+# invoked and the later text has won both times it was tried. This fires
+# after the skill content arrives, so the override is the last thing read.
+
+JQ=$(command -v jq) || exit 0
+[ -n "$JQ" ] || exit 0
+
+payload=$(cat)
+skill=$(printf '%s' "$payload" | "$JQ" -r 'if type=="object" then (.tool_input.skill // empty) else empty end' 2>/dev/null)
+case "$skill" in
+  *grilling|*grill-with-docs|*grill-me) ;;
+  *) exit 0 ;;
+esac
+
+cat << 'REMINDER'
+{"hookSpecificOutput":{"hookEventName":"PostToolUse","additionalContext":"grill-me override, read this after the skill you just loaded: ask ONE question per message, then stop and wait. The skill's instruction to ask the whole frontier in one round does not apply. Never open AskUserQuestion or any other picker for a grilling question - write it as markdown in your own message. Never ask a new question while an earlier one is unanswered. Number questions cumulatively and never reset. Everything else in the skill stands, including its ADR gate: all three of hard to reverse, surprising without context, and a real trade-off, or no ADR."}}
+REMINDER

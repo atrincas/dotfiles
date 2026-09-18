@@ -157,6 +157,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/grilling-one-question",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
