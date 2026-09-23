@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - `grill-with-docs` rule: deleted. Its first line — "Prefer this over `grill-me`" — is what caused the batching, by routing every grilling session into the plugin skill whose own text says to ask the whole frontier in one round. Grilling now lives entirely in the `grill-me` skill. `mattpocock-skills@claude-plugins-official` stays enabled; only the routing to `grilling` goes, and `tdd`, `code-review`, `diagnosing-bugs` and the rest are untouched
 - settings: the reordered keys in this diff (`model`, `outputStyle`, `voiceEnabled`) are Claude Code rewriting the file, not an edit
+- settings: `model` pin (`opus[1m]`) — sessions now start on the account default model; pick another per session with `/model`
 
 ### Fixed
 - settings: the Atlassian permission rules were spelled `mcp__atlassian__<tool>` and matched nothing. Claude Code namespaces MCP servers that come from a plugin as `plugin_<plugin>_<server>`, so the live tool names are `mcp__plugin_atlassian_atlassian__<tool>` — the plugin's own `.mcp.json` names the server `atlassian`, which is what the rules had been copied from. All eight `ask` rules and the server-level `allow` entry were dead: `createJiraIssue`, `editJiraIssue`, `transitionJiraIssue`, `addWorklogToJiraIssue`, `createConfluencePage`, `updateConfluencePage` and `createIssueLink` were relying on the default permission prompt instead of the `ask` rules meant to force one
