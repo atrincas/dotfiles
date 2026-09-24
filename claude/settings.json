@@ -187,6 +187,18 @@
             "command": "~/.claude/hooks/plan-done-sound",
             "timeout": 5
           }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "nohup afplay ~/.claude/sounds/permission.mp3 >/dev/null 2>&1 &",
+            "timeout": 5
+          }
+        ]
+      }
         ]
       }
     ]
