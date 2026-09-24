@@ -81,6 +81,7 @@ link_file "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
+link_file "$DOTFILES/claude/sounds" "$HOME/.claude/sounds"
 
 # Hooks are linked per file: ~/.claude/hooks also holds vendor-installed scripts,
 # so the directory itself cannot be a symlink.
