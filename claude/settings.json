@@ -49,7 +49,7 @@
       "Read(.env*)",
       "Edit(.env*)",
       "Write(.env*)",
-      "mcp__plugin_atlassian_atlassian__addCommentToJiraIssue"
+      "mcp__plugin_atlassian_atlassian__addOrEditJiraIssueComment"
     ],
     "ask": [
       "Bash(git push --force*)",
@@ -65,12 +65,10 @@
       "Bash(gh issue delete*)",
       "Bash(gh repo delete*)",
       "mcp__plugin_atlassian_atlassian__createJiraIssue",
-      "mcp__plugin_atlassian_atlassian__editJiraIssue",
-      "mcp__plugin_atlassian_atlassian__transitionJiraIssue",
-      "mcp__plugin_atlassian_atlassian__addWorklogToJiraIssue",
-      "mcp__plugin_atlassian_atlassian__createConfluencePage",
-      "mcp__plugin_atlassian_atlassian__updateConfluencePage",
-      "mcp__plugin_atlassian_atlassian__createIssueLink"
+      "mcp__plugin_atlassian_atlassian__createConfluenceContent",
+      "mcp__plugin_atlassian_atlassian__updateConfluenceContent",
+      "mcp__plugin_atlassian_atlassian__executeWrite",
+      "mcp__plugin_atlassian_atlassian__executeDestructive"
     ],
     "defaultMode": "plan"
   },
@@ -187,6 +185,8 @@
             "command": "~/.claude/hooks/plan-done-sound",
             "timeout": 5
           }
+        ]
+      }
     ],
     "Notification": [
       {
@@ -197,8 +197,6 @@
             "command": "nohup afplay ~/.claude/sounds/permission.mp3 >/dev/null 2>&1 &",
             "timeout": 5
           }
-        ]
-      }
         ]
       }
     ]
