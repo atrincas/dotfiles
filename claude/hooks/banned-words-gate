@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# PreToolUse(Bash): deny commit, PR and issue text that breaks the straight-talk rule.
+
+JQ=$(command -v jq 2>/dev/null)
+if [ -z "$JQ" ]; then
+  for candidate in /opt/homebrew/bin/jq /usr/local/bin/jq; do
+    [ -x "$candidate" ] && JQ="$candidate" && break
+  done
+fi
+[ -n "$JQ" ] || exit 0
+
+command=$("$JQ" -r 'if type == "object" then (.tool_input.command // empty) else empty end' 2>/dev/null)
+[ -n "$command" ] || exit 0
+
+WRITES='(^|[;&|([:space:]])(git([[:space:]]+-C[[:space:]]+[^[:space:]]+)?[[:space:]]+commit|gh[[:space:]]+(pr|issue)[[:space:]]+(create|edit|comment|review))([[:space:]]|$)'
+printf '%s' "$command" | grep -Eq "$WRITES" || exit 0
+
+prose=$(printf '%s' "$command" | sed -E 's/`[^`]*`//g')
+
+BANNED='load[- ]bearing|blast[- ]radius|foot[- ]?guns?|yak[- ]shav(e|ing)|belt[- ]and[- ]suspenders|smoking[- ]guns?|spines?|seams?|substrates?|surface[- ]areas?|idempoten(t|tly|cy)|grammar of the system'
+words=$(printf '%s' "$prose" | grep -Eiow "$BANNED" | tr '[:upper:]' '[:lower:]' | sort -u | paste -sd, - | sed 's/,/, /g')
+
+MENTION='(^|[[:space:](])@[A-Za-z0-9][A-Za-z0-9-]*([^A-Za-z0-9/-]|$)'
+mentions=$(printf '%s' "$prose" | grep -Eo "$MENTION" | grep -Eo '@[A-Za-z0-9-]+' | sort -u | paste -sd, - | sed 's/,/, /g')
+
+[ -n "$words$mentions" ] || exit 0
+
+reason="Blocked by banned-words-gate."
+[ -n "$words" ] && reason="$reason Banned words from the straight-talk rule: $words. Write what happens instead."
+[ -n "$mentions" ] && reason="$reason @mentions are not allowed by the github-pr-writing rule: $mentions. Remove them."
+
+"$JQ" -n --arg reason "$reason" '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "deny", permissionDecisionReason: $reason}}'

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `install.sh --personal` and `claude/settings.personal.json`: settings for a machine used only for personal projects. Same rules, skills, sounds, hooks and permissions as the work settings, without the Vizzuality and client parts: no `vizz-core`, `atlassian`, `figma` or `warp` plugins and their permissions, no `cbm-*` codebase-memory hooks (the MCP server is not installed there) and no status line (`statusline.sh` comes from the Vizzuality standards repo). It also drops `superpowers` and keeps `mattpocock-skills`: the two packs had three skills each for grilling, code review and TDD that competed to trigger, and the superpowers SessionStart text ("you MUST invoke the skill… even a 1% chance") works against `answer-dont-act`. The work settings keep superpowers for now
+- `claude/SETUP-PERSONAL.md`: step-by-step instructions that Claude Code follows on the personal machine — run `install.sh --personal`, install only the plugins in `enabledPlugins`, pipe sample input into each hook, and run a smoke test that no superpowers or vizz skill loads
+- `banned-words-gate` hook (`PreToolUse` on `Bash`, both settings files): denies a `git commit`, `gh pr create|edit|comment|review` or `gh issue create|edit|comment` whose text contains a word from the `straight-talk` banned list or an `@mention`. Both rules existed only as prose. Text inside backticks is skipped, and `@scope/package` and email addresses are not read as mentions. It checks only the command text, so a `--body-file` and chat replies are not covered
+- settings: `ask` rules for `gh pr edit`, `gh pr comment`, `gh pr review`, `gh issue edit`, `gh issue comment` and `gh api` calls that write (`-X`, `--method`, `-f`, `-F`, `--field`, `--raw-field`, `--input`). `Bash(gh:*)` in `allow` let these run with no prompt, so the `github-pr-writing` rule "never change a published PR unless told to" had no check behind it
+- `claude/CLAUDE.md`: record a trap — a step that looks like it worked but did not — as a `feedback` memory whose description starts with `TRAP:`
+
 ### Fixed
 - settings: Atlassian permission rules renamed to the plugin's current tool names. The old names matched no tool, so comments, Confluence writes and deletes ran with no prompt under the server-wide `allow`. The comment deny now names `addOrEditJiraIssueComment`; the Confluence `ask` rules name `createConfluenceContent` and `updateConfluenceContent`. `addWorklogToJiraIssue` and `createIssueLink` are gone from the plugin, and those operations now run through `executeWrite`, so `executeWrite` and `executeDestructive` are in `ask`. `createJiraIssue` still prompts
 

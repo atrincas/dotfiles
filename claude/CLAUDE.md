@@ -2,12 +2,16 @@
 
 All Claude Code global configuration is managed through `~/dev/vizzuality/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, hooks, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
 
-- `~/dev/vizzuality/dotfiles/claude/settings.json` → `~/.claude/settings.json`
+- `~/dev/vizzuality/dotfiles/claude/settings.json` → `~/.claude/settings.json` on the work machine; `settings.personal.json` → `~/.claude/settings.json` on the personal machine (`install.sh --personal`). A change to permissions or hooks usually belongs in both files
 - `~/dev/vizzuality/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
 - `~/dev/vizzuality/dotfiles/claude/rules/` → `~/.claude/rules/`
 - `~/dev/vizzuality/dotfiles/claude/skills/` → `~/.claude/skills/`
 - `~/dev/vizzuality/dotfiles/claude/sounds/` → `~/.claude/sounds/`
 - `~/dev/vizzuality/dotfiles/claude/hooks/<script>` → `~/.claude/hooks/<script>` (per file — `~/.claude/hooks/` also holds vendor-installed scripts and is not itself a symlink)
+
+## Memory
+
+- Record a trap — a command or step that looks like it worked but did not — as a `feedback` memory whose description starts with `TRAP:`
 
 ## Tool preferences
 
