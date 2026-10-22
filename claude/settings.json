@@ -93,6 +93,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/banned-words-gate",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [

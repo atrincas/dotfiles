@@ -4,6 +4,13 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d_%H%M%S)"
 
+CLAUDE_SETTINGS="settings.json"
+case "${1:-}" in
+  --personal) CLAUDE_SETTINGS="settings.personal.json" ;;
+  "") ;;
+  *) printf "Usage: %s [--personal]\n" "$0" >&2; exit 1 ;;
+esac
+
 info() { printf "\033[1;34m→\033[0m %s\n" "$1"; }
 success() { printf "\033[1;32m✓\033[0m %s\n" "$1"; }
 warn() { printf "\033[1;33m!\033[0m %s\n" "$1"; }
@@ -78,7 +85,7 @@ link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"
 
 # claude code
 link_file "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+link_file "$DOTFILES/claude/$CLAUDE_SETTINGS" "$HOME/.claude/settings.json"
 link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES/claude/sounds" "$HOME/.claude/sounds"

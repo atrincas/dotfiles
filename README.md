@@ -28,6 +28,10 @@ The install script will:
 4. Symlink config files to their expected locations
 5. Back up any existing files to `~/.dotfiles-backup/`
 
+### Personal machine
+
+`./install.sh --personal` links `claude/settings.personal.json` as the Claude Code settings instead of `claude/settings.json`. It has no Vizzuality plugins, no superpowers and no codebase-memory hooks. To let Claude Code do the full setup, including plugins and hook checks, open it in the repo and say "follow claude/SETUP-PERSONAL.md".
+
 ## Manual steps after install
 
 ### Git identity
