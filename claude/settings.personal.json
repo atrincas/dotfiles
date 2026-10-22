@@ -107,27 +107,6 @@
             "timeout": 5
           }
         ]
-      },
-      {
-        "matcher": "ExitPlanMode",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/plan-done-sound",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/plan-done-sound",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "Notification": [
